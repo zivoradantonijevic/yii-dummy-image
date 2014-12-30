@@ -20,7 +20,7 @@
  */
 class EDummyImage
 {
-    public static function image($params = array())
+    public function image($params = array())
     {
         if (empty($params)) {
             $params = $_GET;
@@ -33,16 +33,16 @@ class EDummyImage
 
 // Now let's check the parameters.
         if ($strSize == null) {
-            self::error('You have to provide the size of the image. Example: 250x320.');
+            $this->error('You have to provide the size of the image. Example: 250x320.');
         }
         if ($strType != 'png' and $strType != 'gif' and $strType != 'jpg') {
-            self::error('The selected type is wrong. You can chose between PNG, GIF or JPG.');
+            $this->error('The selected type is wrong. You can chose between PNG, GIF or JPG.');
         }
         if (strlen($strBg) != 6 and strlen($strBg) != 3) {
-            self::error('You have to provide the background color as hex. Example: 000000 (for black).');
+            $this->error('You have to provide the background color as hex. Example: 000000 (for black).');
         }
         if (strlen($strColor) != 6 and strlen($strColor) != 3) {
-            self::error('You have to provide the font color as hex. Example: ffffff (for white).');
+            $this->error('You have to provide the font color as hex. Example: ffffff (for white).');
         }
 
 // Get width and height from current size.
@@ -54,7 +54,7 @@ class EDummyImage
         if (ctype_digit($strWidth) and ctype_digit($strHeight)) {
             // Check if the image dimensions are over 9999 pixel.
             if (($strWidth > 9999) or ($strHeight > 9999)) {
-                self::error('The maximum picture size can be 9999x9999px.');
+                $this->error('The maximum picture size can be 9999x9999px.');
             }
 
             // Let's define the font (size. And NEVER go above 9).
@@ -67,10 +67,10 @@ class EDummyImage
 
             $strText = isset($params['text']) ? $params['text'] : $strWidth . 'x' . $strHeight;
 
-            self::drawImage($strWidth, $strHeight, $strBg, $strColor, $intFontSize, $strFont, $strText, $strType);
+            $this->drawImage($strWidth, $strHeight, $strBg, $strColor, $intFontSize, $strFont, $strText, $strType);
 
         } else {
-            self::error('You have to provide the size of the image. Example: 250x320.');
+            $this->error('You have to provide the size of the image. Example: 250x320.');
         }
     }
 
@@ -80,7 +80,7 @@ class EDummyImage
      */
     protected function error($text)
     {
-        self::drawImage(200, 200, array(255, 255, 255), array(0, 0, 0), 10, 'DroidSansMono.ttf', $text);
+        $this->drawImage(200, 200, array(255, 255, 255), array(0, 0, 0), 10, 'DroidSansMono.ttf', $text);
     }
 
     /**
@@ -109,8 +109,8 @@ class EDummyImage
         if (!($objImg = @imagecreatetruecolor($strWidth, $strHeight))) {
             die('Sorry, there is a problem with the GD lib.');
         }
-        $strBgRgb = self::html2rgb($strBg);
-        $strColorRgb = self::html2rgb($strColor);
+        $strBgRgb = $this->html2rgb($strBg);
+        $strColorRgb = $this->html2rgb($strColor);
         $strBg = imagecolorallocate($objImg, $strBgRgb[0], $strBgRgb[1], $strBgRgb[2]);
         $strColor = imagecolorallocate($objImg, $strColorRgb[0], $strColorRgb[1], $strColorRgb[2]);
 
@@ -159,7 +159,7 @@ class EDummyImage
         } elseif (strlen($strColor) == 3) {
             list($strRed, $strGreen, $strBlue) = array($strColor[0] . $strColor[0], $strColor[1] . $strColor[1], $strColor[2] . $strColor[2]);
         } else {
-            self::error('Valid colors are with length 3 or 6');
+            $this->error('Valid colors are with length 3 or 6');
         }
 
         $strRed = hexdec($strRed);
