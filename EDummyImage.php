@@ -20,6 +20,10 @@
  */
 class EDummyImage
 {
+    public $defaultType = 'png';
+    public $defaultBackground = 'ffffff';
+    public $defaultColor = '000000';
+
     public function image($params = array())
     {
         if (empty($params)) {
@@ -27,9 +31,9 @@ class EDummyImage
         }
 // Handle the parameters.
         $strSize = (isset($params['size']) ? strtolower($params['size']) : null);
-        $strType = (isset($params['type']) ? strtolower($params['type']) : 'png');
-        $strBg = (isset($params['bg']) ? strtolower($params['bg']) : '000000');
-        $strColor = (isset($params['color']) ? strtolower($params['color']) : 'ffffff');
+        $strType = (isset($params['type']) ? strtolower($params['type']) : $this->defaultType);
+        $strBg = (isset($params['bg']) ? strtolower($params['bg']) : $this->defaultColor);
+        $strColor = (isset($params['color']) ? strtolower($params['color']) : $this->defaultColor);
 
 // Now let's check the parameters.
         if ($strSize == null) {
