@@ -23,6 +23,7 @@ class EDummyImage
     public $defaultType = 'png';
     public $defaultBackground = 'ffffff';
     public $defaultColor = '000000';
+    public $defaultText = null;
 
     public function image($params = array())
     {
@@ -69,7 +70,9 @@ class EDummyImage
             putenv('GDFONTPATH=' . dirname(__FILE__) . '/fonts');
             $strFont = "DroidSansMono.ttf";
 
-            $strText = isset($params['text']) ? $params['text'] : $strWidth . 'x' . $strHeight;
+            $strText = isset($params['text'])
+                ? $params['text']
+                : $this->defaultText !== null ? $this->defaultText : $strWidth . 'x' . $strHeight;
 
             $this->drawImage($strWidth, $strHeight, $strBg, $strColor, $intFontSize, $strFont, $strText, $strType);
 
