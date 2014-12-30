@@ -19,9 +19,14 @@ How to use:
     /** Using as action **/
     public function actions()
         {
-            return [
-                'dummy'=>'ext.dummyImage.actions.DummyImageAction'
-            ];
+            return array(
+                'nophoto' => array('class' => 'ext.dummyImage.actions.DummyImageAction', 
+                             'defaultText' => 'No Photo', 
+                             'defaultBackground'=>'eeeeee',
+                             'defaultType'=>'png',
+                             'defaultColor'=>'000000'
+                             )
+            );
         }
 
 
@@ -29,7 +34,11 @@ How to use:
     /** Using with inline component **/
     $dummy = Yii::createComponent(
               array(
-                  'class' => 'ext.dummyImage.EDummyImage'
+                  'class' => 'ext.dummyImage.EDummyImage',
+                  'defaultText' => 'No Photo', 
+                  'defaultBackground'=>'eeeeee',
+                  'defaultType'=>'png',
+                  'defaultColor'=>'000000'
               )
           );
       $dummy->image();
@@ -40,7 +49,9 @@ How to use:
       'components'=>array(
       ...
       'dummy'=>array(
-                    'class' => 'ext.dummyImage.EDummyImage'
+                    'class' => 'ext.dummyImage.EDummyImage',
+                    'defaultText' => 'No Photo', 
+                    'defaultBackground'=>'eeeeee'
                 )
       ...
       )

@@ -23,7 +23,7 @@ class EDummyImage
     public $defaultType = 'png';
     public $defaultBackground = 'ffffff';
     public $defaultColor = '000000';
-    public $defaultText = null;
+    public $defaultText;
 
     public function image($params = array())
     {
@@ -33,7 +33,7 @@ class EDummyImage
 // Handle the parameters.
         $strSize = (isset($params['size']) ? strtolower($params['size']) : null);
         $strType = (isset($params['type']) ? strtolower($params['type']) : $this->defaultType);
-        $strBg = (isset($params['bg']) ? strtolower($params['bg']) : $this->defaultColor);
+        $strBg = (isset($params['bg']) ? strtolower($params['bg']) : $this->defaultBackground);
         $strColor = (isset($params['color']) ? strtolower($params['color']) : $this->defaultColor);
 
 // Now let's check the parameters.
@@ -95,8 +95,8 @@ class EDummyImage
      *
      * @param int    $strWidth
      * @param int    $strHeight
-     * @param array  $strBg
-     * @param array  $strColor
+     * @param string $strBg
+     * @param string $strColor
      * @param int    $intFontSize
      * @param string $strFont
      * @param string $strText
@@ -105,8 +105,8 @@ class EDummyImage
     protected function drawImage(
         $strWidth,
         $strHeight,
-        $strBg = array(255, 255, 255),
-        $strColor = array(0, 0, 0),
+        $strBg = 'ffffff',
+        $strColor = '000000',
         $intFontSize = 10,
         $strFont = 'DroidSansMono.ttf',
         $strText = '',
